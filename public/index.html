@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WORD IMPOSTER</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Global Header -->
+  <header class="app-header floaty">
+    <h1>WORD IMPOSTER</h1>
+  </header>
+
+  <main id="app">
+    <!-- Landing -->
+    <section id="landing" class="panel center" 
+  style="position:relative; height:100vh; overflow:auto;">
+
+  <!-- Centered wrapper -->
+  <div style="position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:20px; padding:20px; text-align:left;">
+
+    <h2 style="font-size:26px; margin:0; text-align:center;">How to Play Word Imposter</h2>
+
+    <p style="max-width:800px; font-size:18px; line-height:1.6; margin:0;">
+      Everyone sits together and the device is passed around.
+    </p>
+    <p style="max-width:800px; font-size:18px; line-height:1.6; margin:0;">
+      The host enters all player names, selects a category (like Animals, Household Items, Cars, etc.), the number of rounds, and how many imposters there will be.
+        ***Leave the number of imposter area blank to be set at random.
+    </p>
+    <p style="max-width:800px; font-size:18px; line-height:1.6; margin:0;">
+      In each round, the device secretly gives a word to every player:
+    </p>
+    <ul style="max-width:800px; font-size:18px; line-height:1.6; margin:0;">
+      <li>Most players (<strong>Crew</strong>) get the same word.</li>
+      <li>A few players (<strong>Imposters</strong>) get a different word.</li>
+    </ul>
+    <p style="max-width:800px; font-size:18px; line-height:1.6; margin:0;">
+      Players cannot show their word to anyone. Each player only sees their word once.
+    </p>
+    <p style="max-width:800px; font-size:18px; line-height:1.6; margin:0;">
+      After everyone knows their word, players must talk, ask questions, and describe their word carefully without saying it directly.
+    </p>
+    <p style="max-width:800px; font-size:18px; line-height:1.6; margin:0;">
+      The goal is to figure out who the Imposters are!
+    </p>
+    <ul style="max-width:800px; font-size:18px; line-height:1.6; margin:0;">
+      <li>Crew members will try to spot who seems “off” or unsure.</li>
+      <li>Imposters will try to blend in and not get caught.</li>
+    </ul>
+    <p style="max-width:800px; font-size:18px; line-height:1.6; margin:0;">
+      At the end of the discussion, players vote on who they think the Imposters are.
+    </p>
+    <p style="max-width:800px; font-size:18px; line-height:1.6; margin:0;">
+      Next round starts with new words and new Imposters.
+    </p>
+
+    <p style="max-width:800px; font-size:18px; line-height:1.6; margin-top:10px; text-align:center;">
+      <strong>Why it’s fun:</strong> Everyone knows the category, so the words are simple and familiar (like “Chair”, “Lion”, “Car”). 
+      It’s about how you describe your word and how well you can act natural if you are the Imposter.
+    </p>
+
+    <button id="hostBtn" class="btn primary floaty-lg" style="margin-top:20px; font-size:20px; padding:18px 24px;">
+      Host the Game
+    </button>
+    <button id="onlineBtn" class="btn primary floaty-lg" style="margin-top:10px; font-size:20px; padding:18px 24px;">
+  Play Online
+</button>
+  </div>
+</section>
+
+
+
+
+    <!-- Setup -->
+    <section id="setup" class="panel hidden">
+      <h2 class="panel-title">Create Game</h2>
+
+      <div class="group">
+        <label class="lbl">Players (min 3)</label>
+        <div id="playersContainer" class="players-grid"></div>
+        <button id="addPlayerBtn" class="btn ghost floaty-sm">+ Add Player</button>
+      </div>
+
+      <div class="group">
+        <label class="lbl" for="categorySelect">Category</label>
+        <select id="categorySelect" class="input">
+          <option value="">— Select a category —</option>
+          <option value="household">🏠 Household items</option>
+          <option value="animals">🐾 Animals</option>
+          <option value="games">🎮 Games</option>
+          <option value="cvstudents">🎓 CV Students</option>
+          <option value="cvteachers">🏫 CV Teachers</option>
+          <option value="birds_simple">🐦 Birds (simple)</option>
+          <option value="indian_celebs">🎬 Indian celebs / people</option>
+          <option value="doraemon">🤖 Doraemon characters</option>
+          <option value="indian_youtubers">🇮🇳 Indian YouTubers</option>
+          <option value="foreign_youtubers">🌍 Foreign YouTubers</option>
+          <option value="car_brands">🚗 Car brands</option>
+          <option value="cricket_indian">🏏 Cricket players (Indian)</option>
+          <option value="pokemon">🔴 Pokémon</option>
+          <option value="cartoon_indian">📺 Cartoons (Indian)</option>
+        </select>
+        
+      </div>
+
+      <div class="row">
+        <div class="group">
+          <label class="lbl" for="roundsInput">Number of rounds</label>
+          <input id="roundsInput" class="input" type="number" min="1" value="3" />
+        </div>
+        <div class="group">
+          <label class="lbl" for="impostersInput">Number of imposters</label>
+          <input id="impostersInput" class="input" type="number" min="1" value="1" />
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="startBtn" class="btn primary floaty-lg">Start Game</button>
+        <button id="backToLandingBtn" class="btn subtle">Back</button>
+      </div>
+    </section>
+
+    <!-- Game -->
+    <section id="game" class="panel hidden">
+      <div class="game-top">
+        <div class="badge soft">Category: <span id="gameCategory">—</span></div>
+        <div class="badge soft">Round: <span id="roundLabel">1</span>/<span id="roundsTotal">1</span></div>
+      </div>
+
+      <p class="hint">Pass the device. Each player taps their name to reveal their word (only once).</p>
+
+      <div id="playerList" class="players-list"></div>
+
+      <div class="actions">
+        <button id="nextRoundBtn" class="btn primary floaty-lg">Next Round</button>
+        <button id="restartBtn" class="btn subtle">Restart</button>
+      </div>
+    </section>
+  </main>
+
+  <footer style="background:#004cb8; color:white; text-align:center; padding:12px; font-size:16px;">
+  <span>Made by <strong>Aniket Raj Mandal</strong></span>
+  &nbsp;|&nbsp;
+  <a href="mailto:aniketrajmandal7@gmail.com" 
+     style="color:white; text-decoration:underline; font-weight:600;">
+    Send Feedback
+  </a>
+</footer>
+
+  <!-- One‑time Reveal Modal -->
+  <div id="revealModal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card floaty">
+      <button class="modal-close" id="modalCloseBtn" aria-label="Close">✕</button>
+      <div class="modal-content">
+        <div class="modal-tag">Your word is</div>
+        <div id="modalWord" class="modal-word">—</div>
+        <div class="modal-sub">Show this to no one 👀</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+document.getElementById('onlineBtn').addEventListener('click', () => {
+  window.location.href = 'online.html';
+});
+</script>
+
+  <script src="categories.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
