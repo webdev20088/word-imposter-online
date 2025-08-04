@@ -1,0 +1,192 @@
+/* ====== Base / Theme (Blue & Bigger) ====== */
+:root{
+  --bg: #d9f0ff;                 /* Light blue background */
+  --panel: #e9f6ff;               /* Panels a softer blue */
+  --panel-dark: #cbe9ff;          /* Slightly darker for contrast */
+  --text: #0b1c38;                /* Deep navy text */
+  --muted: #375a82;
+  --primary: #0077ff;             /* Vibrant blue */
+  --primary-weak: #cfe6ff;
+  --accent: #00c2a8;
+  --shadow: 0 12px 36px rgba(12, 38, 80, 0.15);
+  --radius: 20px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: 'Segoe UI', Roboto, Inter, sans-serif;
+  color:var(--text);
+  background: var(--bg);
+}
+
+/* ====== Floating animation for elements ====== */
+.floaty { animation: float 4s ease-in-out infinite; }
+.floaty-sm:hover,
+.floaty-lg:hover{
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: var(--shadow);
+}
+
+@keyframes float{
+  0%{ transform: translateY(0) }
+  50%{ transform: translateY(-6px) }
+  100%{ transform: translateY(0) }
+}
+
+/* ====== Header ====== */
+.app-header{
+  position:sticky; top:0; z-index:10;
+  display:flex; align-items:center; justify-content:center;
+  height:90px;
+  background: linear-gradient(180deg, #0077ff 0%, #004cb8 100%);
+  color:white;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+}
+.app-header h1{
+  margin:0;
+  text-transform:uppercase;
+  font-weight:800;
+  font-size: clamp(26px, 4.5vw, 40px);
+  letter-spacing:.16em;
+}
+
+/* ====== Panels ====== */
+#app{ max-width:1200px; margin:30px auto; padding:0 20px; }
+.panel{
+  background: var(--panel);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(24px, 3vw, 40px);
+}
+.panel-title{ margin:0 0 20px; font-size: 28px; text-align:center; }
+
+/* ====== Inputs & Layout ====== */
+.group{ margin-bottom: 20px; }
+.lbl{ display:block; font-weight:700; margin-bottom:10px; font-size:18px; }
+.input, select.input{
+  width:100%; padding:16px 18px;
+  font-size:18px;
+  border-radius: 14px;
+  border: 2px solid var(--panel-dark);
+  background:#fafdff;
+  outline:none;
+}
+.input:focus{
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(0,119,255,0.25);
+}
+.row{ display:grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap:16px; }
+
+/* ====== Buttons ====== */
+.btn{
+  border:0; cursor:pointer;
+  padding:16px 20px;
+  font-weight:800;
+  font-size:18px;
+  letter-spacing:.03em;
+  border-radius: 16px;
+  transition: all .25s ease;
+}
+.btn.primary{ background: var(--primary); color:white; }
+.btn.subtle{ background:#e1efff; color:#00346b; }
+.btn.ghost{ background:#fff; border:2px solid var(--panel-dark); }
+.btn:disabled{ opacity:.6; cursor:not-allowed; }
+
+/* ====== Player Inputs ====== */
+.players-grid{
+  display:grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap:14px;
+}
+.player-input{
+  display:flex; gap:10px; align-items:center;
+  padding:12px;
+  border-radius:14px;
+  background: var(--panel-dark);
+}
+.player-input .index{
+  width:36px; height:36px;
+  background:var(--primary-weak);
+  display:flex; align-items:center; justify-content:center;
+  border-radius:999px;
+  font-weight:700;
+  color:var(--text);
+}
+
+/* ====== Player chips in game ====== */
+.players-list{
+  display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap:16px; margin-top:20px;
+}
+.player-chip{
+  padding:20px;
+  border-radius: 18px;
+  text-align:center;
+  font-weight:800;
+  font-size:20px;
+  background: linear-gradient(180deg, #ffffff, #eaf6ff);
+  border:2px solid var(--panel-dark);
+  box-shadow: var(--shadow);
+  cursor:pointer;
+  transition: all .25s ease;
+}
+.player-chip:hover{
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 20px 40px rgba(12,38,80,0.25);
+}
+
+/* ====== Game top info ====== */
+.game-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom: 14px;
+}
+.badge{
+  background: var(--primary-weak);
+  padding:10px 14px;
+  border-radius: 999px;
+  font-weight:700;
+  font-size: 16px;
+}
+
+/* ====== Modal (word reveal) ====== */
+.modal{
+  position:fixed; inset:0;
+  background: rgba(0,40,100,0.5);
+  display:flex; align-items:center; justify-content:center;
+}
+.modal.hidden{ display:none; }
+.modal-card{
+  background: #fff;
+  border-radius: 24px;
+  padding: 30px;
+  width: min(600px, 90%);
+  box-shadow: var(--shadow);
+  position: relative;
+}
+.modal-close{
+  position:absolute;
+  top:16px; right:16px;
+  border:0; background:#f0f6ff;
+  width:40px; height:40px;
+  border-radius:999px;
+  font-size:22px;
+  cursor:pointer;
+}
+.modal-tag{ color:var(--muted); font-size:16px; text-transform:uppercase; letter-spacing:.12em; }
+.modal-word{
+  font-size: clamp(34px, 6vw, 48px);
+  font-weight: 900;
+  padding:10px 16px;
+  margin:14px 0;
+  background: var(--panel-dark);
+  border-radius:16px;
+}
+.modal-sub{ color:var(--muted); font-size:16px; }
+
+/* ====== Actions buttons ====== */
+.actions{ display:flex; gap:14px; justify-content:center; margin-top: 20px; }
+
+.hint{ color:var(--muted); text-align:center; font-size:16px; }
+.hidden{ display:none; }

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WORD IMPOSTER - Online</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header class="app-header floaty">
+  <h1>WORD IMPOSTER - Online</h1>
+</header>
+
+<main id="app">
+  <!-- Landing -->
+  <section id="onlineLanding" class="panel center">
+    <h2 class="panel-title">Play Online</h2>
+    <div class="actions">
+      <button id="hostOnlineBtn" class="btn primary floaty-lg">Host Online Game</button>
+      <button id="joinOnlineBtn" class="btn ghost floaty-lg">Join Online Game</button>
+      <button id="backBtn" class="btn subtle">Back</button>
+    </div>
+  </section>
+
+  <!-- Host Setup -->
+  <section id="hostSetup" class="panel hidden">
+    <h2 class="panel-title">Create Online Game</h2>
+    <div class="group">
+      <label class="lbl">Players (min 3)</label>
+      <div id="playersContainerOnline" class="players-grid"></div>
+      <button id="addPlayerOnlineBtn" class="btn ghost floaty-sm">+ Add Player</button>
+    </div>
+    <div class="group">
+      <label class="lbl" for="categorySelectOnline">Category</label>
+      <select id="categorySelectOnline" class="input">
+        <option value="">— Select a category —</option>
+        <option value="household">🏠 Household items</option>
+        <option value="animals">🐾 Animals</option>
+        <option value="games">🎮 Games</option>
+        <option value="cvstudents">🎓 CV Students</option>
+        <option value="cvteachers">🏫 CV Teachers</option>
+        <option value="birds_simple">🐦 Birds (simple)</option>
+        <option value="indian_celebs">🎬 Indian celebs / people</option>
+        <option value="doraemon">🤖 Doraemon characters</option>
+        <option value="indian_youtubers">🇮🇳 Indian YouTubers</option>
+        <option value="foreign_youtubers">🌍 Foreign YouTubers</option>
+        <option value="car_brands">🚗 Car brands</option>
+        <option value="cricket_indian">🏏 Cricket players (Indian)</option>
+        <option value="pokemon">🔴 Pokémon</option>
+        <option value="cartoon_indian">📺 Cartoons (Indian)</option>
+      </select>
+    </div>
+    <div class="row">
+      <div class="group">
+        <label class="lbl" for="roundsOnlineInput">Number of rounds</label>
+        <input id="roundsOnlineInput" class="input" type="number" min="1" value="3" />
+      </div>
+      <div class="group">
+        <label class="lbl" for="impostersOnlineInput">Number of imposters</label>
+        <input id="impostersOnlineInput" class="input" type="number" min="1" value="1" />
+      </div>
+    </div>
+    <div class="actions">
+      <button id="createRoomBtn" class="btn primary floaty-lg">Create Room</button>
+      <button id="backToLandingBtn1" class="btn subtle">Back</button>
+    </div>
+  </section>
+
+  <!-- Game -->
+  <section id="onlineGame" class="panel hidden">
+    <div class="game-top">
+      <div class="badge soft">Room: <span id="roomCodeDisplay"></span></div>
+    </div>
+    <p class="hint">Tap a player's name to reveal their word (only once per round).</p>
+    <div id="playerListOnline" class="players-list"></div>
+    <div class="actions" id="hostControls" style="display:none;">
+      <button id="nextRoundOnlineBtn" class="btn primary floaty-lg">Start / Next Round</button>
+    </div>
+  </section>
+</main>
+
+<!-- Modal -->
+<div id="revealModal" class="modal hidden">
+  <div class="modal-card floaty">
+    <button class="modal-close" id="modalCloseBtn" aria-label="Close">✕</button>
+    <div class="modal-content">
+      <div class="modal-tag">Your word is</div>
+      <div id="modalWord" class="modal-word">—</div>
+      <div class="modal-sub">Show this to no one 👀</div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script src="categories.js"></script>
+<script src="online.js"></script>
+</body>
+</html>
