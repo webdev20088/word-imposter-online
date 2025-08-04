@@ -1,4 +1,4 @@
-const socket = io("http://localhost:3000"); // Change to your Render URL when deploying
+const socket = io("https://word-imposter-online.onrender.com/"); // Change to your Render URL when deploying
 
 // Elements
 const sections = {
